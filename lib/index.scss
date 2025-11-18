@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Cookie&display=swap');
+
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url('./fonts/Manrope.ttf') format('woff2');
+}
+
+* {
+    outline: none;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: none;
+    font-family: "Manrope", serif;
+}
