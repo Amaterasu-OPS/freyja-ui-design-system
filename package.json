@@ -7,6 +7,7 @@
   "files": [
     "dist"
   ],
+  "license": "MIT",
   "repository": {
     "url": "https://github.com/Amaterasu-OPS/freyja-ui-design-system"
   },
