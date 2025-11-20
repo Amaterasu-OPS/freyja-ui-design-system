@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 import { Size } from '../../types';
 
@@ -11,9 +11,7 @@ export interface FlexProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
 }
 
-const StyledFlex = styled.div.withConfig({
-  shouldForwardProp: (prop) => !['direction', 'justifyContent', 'alignItems', 'wrap', 'gap'].includes(prop),
-})<FlexProps>`
+const StyledFlex = styled.div<FlexProps>`
     ${props => `
         display: flex;
         flex-direction: ${props.direction || 'row'};

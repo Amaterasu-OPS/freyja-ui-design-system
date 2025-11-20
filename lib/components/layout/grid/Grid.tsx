@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 import { Size } from '../../types';
 
@@ -12,9 +12,7 @@ export interface GridProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
 }
 
-const StyledGrid = styled.div.withConfig({
-  shouldForwardProp: (prop) => !['gridTemplateColumns', 'gridTemplateRows', 'gridArea', 'gap', 'direction', 'justifyContent', 'alignItems', 'wrap'].includes(prop),
-})<GridProps>`
+const StyledGrid = styled.div<GridProps>`
     ${props => `
         display: grid;
         ${props.gridTemplateColumns ? `grid-template-columns: ${props.gridTemplateColumns};` : ''}

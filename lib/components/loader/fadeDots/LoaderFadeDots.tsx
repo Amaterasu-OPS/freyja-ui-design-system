@@ -1,10 +1,10 @@
+import styled from '@emotion/styled';
 import { isLightColor } from '@ui';
-import { motion, Variants } from 'motion/react';
-import styled from 'styled-components';
+import { HTMLMotionProps, motion,Variants } from 'motion/react';
 
 import { BaseLoaderType } from '../types';
 
-export interface LoaderFadeDotsProps extends BaseLoaderType, React.HTMLAttributes<HTMLDivElement> {
+export interface LoaderFadeDotsProps extends BaseLoaderType, HTMLMotionProps<'div'> {
   numberOfDots?: number;
 }
 

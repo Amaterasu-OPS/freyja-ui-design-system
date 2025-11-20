@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 import { isLightColor } from '../utils';
 
@@ -48,9 +48,7 @@ const BottomRight = () => `
   right: 16px;
 `;
 
-const StyledFab = styled.div.withConfig({
-  shouldForwardProp: (prop) => !['color', 'position', 'size', 'disabled'].includes(prop),
-})<FabProps>`
+const StyledFab = styled.div<FabProps>`
   ${props => `
     display: flex;
     justify-content: center;

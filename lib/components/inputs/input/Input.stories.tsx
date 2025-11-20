@@ -15,6 +15,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Input: Story = {
   args: {
+    id: 'input-storybook',
     label: 'Input Label',
     type: 'text',
     disabled: false,

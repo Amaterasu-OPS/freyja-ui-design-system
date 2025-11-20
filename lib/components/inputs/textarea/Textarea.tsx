@@ -1,36 +1,37 @@
+import { css } from '@emotion/react';
+import styled from '@emotion/styled';
+import { StyledTheme } from '@ui';
 import React from 'react';
-import styled, {css} from 'styled-components';
 
 export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   label: string;
+  id: string;
   value?: string | number;
   disabled?: boolean;
   error?: boolean;
   resize?: boolean;
 }
 
-const disabledTextareaCSS = css`
-    background-color: ${props => props.theme.colors.input.disabled.background} !important;
+const disabledTextareaCSS = (theme: StyledTheme) => css`
+    background-color: ${theme.colors.input.disabled.background} !important;
     cursor: not-allowed;
-    border-color: ${props => props.theme.colors.input.disabled.border};
+    border-color: ${theme.colors.input.disabled.border};
 
     label, textarea {
-        color: ${props => props.theme.colors.input.disabled.label};
+        color: ${theme.colors.input.disabled.label};
     }
 `;
 
-const errorLabelCSS = css`
-    color: ${props => props.theme.colors.error} !important;
+const errorLabelCSS = (theme: StyledTheme) => css`
+    color: ${theme.colors.error} !important;
     font-weight: 600;
 `;
 
-const errorTextareaCSS = css`
-    border-color: ${props => props.theme.colors.error} !important;
+const errorTextareaCSS = (theme: StyledTheme) => css`
+    border-color: ${theme.colors.error} !important;
 `;
 
-const StyledDivTextarea = styled.div.withConfig({
-  shouldForwardProp: (prop) => !['disabled'].includes(prop),
-})<{ disabled?: boolean, error?: boolean }>`
+const StyledDivTextarea = styled.div<{ disabled?: boolean, error?: boolean }>`
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -40,17 +41,15 @@ const StyledDivTextarea = styled.div.withConfig({
     transition: all 0.2s ease-in-out;
     margin-top: 8px;
 
-    ${(props) => props.disabled ? disabledTextareaCSS: ''}
-    ${(props) => props.error && errorTextareaCSS}
+    ${(props) => props.disabled ? disabledTextareaCSS(props.theme) : ''}
+    ${(props) => props.error && errorTextareaCSS(props.theme)}
 
     &:has(> textarea:focus), &:has(> textarea:not(:placeholder-shown)) {
         border-color: ${props => props.theme.colors.input.border};
     }
 `;
 
-const StyledTextarea = styled.textarea.withConfig({
-  shouldForwardProp: (prop) => !['disabled'].includes(prop),
-})<{ disabled?: boolean, error?: boolean, resize?: boolean }>`
+const StyledTextarea = styled.textarea<{ disabled?: boolean, error?: boolean, resize?: boolean }>`
     background: none;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -65,7 +64,7 @@ const StyledTextarea = styled.textarea.withConfig({
     ${(props) => props.disabled && 'pointer-events: none;'}
 
     & ~ label {
-        ${(props) => props.error && errorLabelCSS}
+        ${(props) => props.error && errorLabelCSS(props.theme)}
         font-weight: 500;
     }
 
@@ -75,7 +74,7 @@ const StyledTextarea = styled.textarea.withConfig({
         background-color: ${props => props.theme.colors.input.contrast};
         padding: 0 4px;
         border-radius: 4rem;
-        ${(props) => props.error && errorLabelCSS}
+        ${(props) => props.error && errorLabelCSS(props.theme)}
     }
 
 `;
@@ -94,25 +93,24 @@ const StyledLabel = styled.label`
 
 export const Textarea = ({
   label,
+  id,
   disabled = false,
   error = false,
   resize = false,
   ...props
 }: TextareaProps) => {
-  const uuid = crypto.randomUUID();
-
   return (
     <StyledDivTextarea disabled={disabled} error={error}>
       <StyledTextarea
         placeholder=" "
         className="input-field"
-        id={uuid}
+        id={id}
         disabled={disabled}
         error={error}
         resize={resize}
         {...props}
       />
-      <StyledLabel htmlFor={uuid}>{label}</StyledLabel>
+      <StyledLabel htmlFor={id}>{label}</StyledLabel>
     </StyledDivTextarea>
   );
 };

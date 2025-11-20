@@ -1,10 +1,10 @@
-import { motion, TargetAndTransition } from 'motion/react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
+import { HTMLMotionProps, motion,TargetAndTransition } from 'motion/react';
 
 import { Overlay } from '../overlay';
 import { Size } from '../types';
 
-export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface DrawerProps extends HTMLMotionProps<'div'> {
   isOpen: boolean;
   position?: 'left' | 'right' | 'top' | 'bottom';
   size?: Size;
@@ -12,9 +12,7 @@ export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
   onDismiss?: () => void;
 }
 
-const StyledDrawer = styled(motion.div).withConfig({
-  shouldForwardProp: (prop) => !['isOpen', 'position', 'size'].includes(prop),
-})<DrawerProps>`
+const StyledDrawer = styled(motion.div)<DrawerProps>`
   ${props => `
     position: fixed;
     ${props.position}: 0;
@@ -87,3 +85,4 @@ export const Drawer = ({
     </Overlay>
   );
 };
+

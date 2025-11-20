@@ -1,5 +1,5 @@
-import { Color, Fonts } from '@ui';
-import styled, { ExecutionContext } from 'styled-components';
+import styled from '@emotion/styled';
+import { Color, Fonts, StyledTheme } from '@ui';
 
 export interface TextProps extends React.HTMLAttributes<HTMLSpanElement> {
   size?: keyof typeof TextSize;
@@ -72,11 +72,11 @@ const TextTypes = {
   italic: 'italic',
 };
 
-const BaseStyle = (props: TextProps & ExecutionContext) => `
+const BaseStyle = (props: TextProps, theme: StyledTheme) => `
     font-size: ${TextSize[props.size || 'body']};
     font-style: ${props.type ? TextTypes[props.type] : 'normal'};
     text-decoration: ${props.decoration ? TextDecorations[props.decoration] : 'none'};
-    color: ${props.color || props.theme.colors.text};
+    color: ${props.color || theme.colors.text};
     font-family: ${Fonts[props.fontFamily || 'default']};
     line-height: ${TextLineHeight[props.size || 'body']};
     font-weight: ${
@@ -85,52 +85,36 @@ const BaseStyle = (props: TextProps & ExecutionContext) => `
     };
 `;
 
-const StyledSpan = styled.span.withConfig({
-  shouldForwardProp: (prop) => !['size', 'weight', 'as', 'type', 'decoration', 'fontFamily'].includes(prop),
-})<TextProps>`
-  ${(props) => BaseStyle(props)}
+const StyledSpan = styled.span<TextProps>`
+  ${(props) => BaseStyle(props, props.theme)}
 `;
 
-const StyledH1 = styled.h1.withConfig({
-  shouldForwardProp: (prop) => !['size', 'weight', 'as', 'type', 'decoration', 'fontFamily'].includes(prop),
-})<TextProps>`
-  ${(props) => BaseStyle(props)}
+const StyledH1 = styled.h1<TextProps>`
+  ${(props) => BaseStyle(props, props.theme)}
 `;
 
-const StyledH2 = styled.h2.withConfig({
-  shouldForwardProp: (prop) => !['size', 'weight', 'as', 'type', 'decoration', 'fontFamily'].includes(prop),
-})<TextProps>`
-  ${(props) => BaseStyle(props)}
+const StyledH2 = styled.h2<TextProps>`
+  ${(props) => BaseStyle(props, props.theme)}
 `;
 
-const StyledH3 = styled.h3.withConfig({
-  shouldForwardProp: (prop) => !['size', 'weight', 'as', 'type', 'decoration', 'fontFamily'].includes(prop),
-})<TextProps>`
-  ${(props) => BaseStyle(props)}
+const StyledH3 = styled.h3<TextProps>`
+  ${(props) => BaseStyle(props, props.theme)}
 `;
 
-const StyledH4 = styled.h4.withConfig({
-  shouldForwardProp: (prop) => !['size', 'weight', 'as', 'type', 'decoration', 'fontFamily'].includes(prop),
-})<TextProps>`
-  ${(props) => BaseStyle(props)}
+const StyledH4 = styled.h4<TextProps>`
+  ${(props) => BaseStyle(props, props.theme)}
 `;
 
-const StyledH5 = styled.h5.withConfig({
-  shouldForwardProp: (prop) => !['size', 'weight', 'as', 'type', 'decoration', 'fontFamily'].includes(prop),
-})<TextProps>`
-  ${(props) => BaseStyle(props)}
+const StyledH5 = styled.h5<TextProps>`
+  ${(props) => BaseStyle(props, props.theme)}
 `;
 
-const StyledH6 = styled.h6.withConfig({
-  shouldForwardProp: (prop) => !['size', 'weight', 'as', 'type', 'decoration', 'fontFamily'].includes(prop),
-})<TextProps>`
-  ${(props) => BaseStyle(props)}
+const StyledH6 = styled.h6<TextProps>`
+  ${(props) => BaseStyle(props, props.theme)}
 `;
 
-const StyledParagraph = styled.p.withConfig({
-  shouldForwardProp: (prop) => !['size', 'weight', 'as', 'type', 'decoration', 'fontFamily'].includes(prop),
-})<TextProps>`
-  ${(props) => BaseStyle(props)}
+const StyledParagraph = styled.p<TextProps>`
+  ${(props) => BaseStyle(props, props.theme)}
 `;
 
 export const Text = ({

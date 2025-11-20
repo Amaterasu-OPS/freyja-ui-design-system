@@ -1,5 +1,6 @@
+import styled from '@emotion/styled';
+import { StyledTheme } from '@ui';
 import { forwardRef, useEffect, useRef, useState } from 'react';
-import styled, { ExecutionContext } from 'styled-components';
 
 import { Loader } from '../loader/loader/Loader';
 import { isLightColor, sizes } from '../utils';
@@ -47,41 +48,30 @@ const rounded = {
   full: '9999px',
 };
 
-const PrimaryButtonStyles = (props: ButtonProps & ExecutionContext) => `
-  color: ${isLightColor(props.color || props.theme.colors.primary) ? 'black' : 'white'};
-  background-color: ${props.color || props.theme.colors.primary};
+const PrimaryButtonStyles = (props: ButtonProps, theme: StyledTheme) => `
+  color: ${isLightColor(props.color || theme.colors.primary) ? 'black' : 'white'};
+  background-color: ${props.color || theme.colors.primary};
 `;
 
-const SecondaryButtonStyles = (props: ButtonProps & ExecutionContext) => `
-  color: ${props.color || props.theme.colors.primary};
-  background-color: color-mix(in srgb, ${props.color || props.theme.colors.primary} 20%, transparent 100%);
-  border-color: color-mix(in srgb, ${props.color || props.theme.colors.primary} 0%, transparent 100%);
+const SecondaryButtonStyles = (props: ButtonProps, theme: StyledTheme) => `
+  color: ${props.color || theme.colors.primary};
+  background-color: color-mix(in srgb, ${props.color || theme.colors.primary} 20%, transparent 100%);
+  border-color: color-mix(in srgb, ${props.color || theme.colors.primary} 0%, transparent 100%);
 `;
 
-const TertiaryButtonStyles = (props: ButtonProps & ExecutionContext) => `
-  color: ${props.color || props.theme.colors.primary};
+const TertiaryButtonStyles = (props: ButtonProps, theme: StyledTheme) => `
+  color: ${props.color || theme.colors.primary};
   background-color: transparent;
 `;
 
-const QuaternaryButtonStyles = (props: ButtonProps & ExecutionContext) => `
-  color: ${props.color || props.theme.colors.primary};
+const QuaternaryButtonStyles = (props: ButtonProps, theme: StyledTheme) => `
+  color: ${props.color || theme.colors.primary};
   background-color: transparent;
   border-color: transparent;
   text-decoration: underline;
 `;
 
-const StyledButton = styled.button.withConfig({
-  shouldForwardProp: (prop) => ![
-    'variant',
-    'size',
-    'rounded',
-    'align',
-    'loaderVariant',
-    'isLoading',
-    'fullWidth',
-    'color',
-  ].includes(prop),
-})<ButtonProps>`
+const StyledButton = styled.button<ButtonProps>`
   ${(props) => `
     padding: ${
       padding[props.size || 'medium'] || padding.medium
@@ -98,10 +88,10 @@ const StyledButton = styled.button.withConfig({
     transition: all 0.3s ease-in-out;
     filter: ${props.isLoading ? 'brightness(70%)' : 'none'};
 
-    ${props.variant === 'primary' ? PrimaryButtonStyles(props) : ''}
-    ${props.variant === 'secondary' ? SecondaryButtonStyles(props) : ''}
-    ${props.variant === 'tertiary' ? TertiaryButtonStyles(props) : ''}
-    ${props.variant === 'quaternary' ? QuaternaryButtonStyles(props) : ''}
+    ${props.variant === 'primary' ? PrimaryButtonStyles(props, props.theme) : ''}
+    ${props.variant === 'secondary' ? SecondaryButtonStyles(props, props.theme) : ''}
+    ${props.variant === 'tertiary' ? TertiaryButtonStyles(props, props.theme) : ''}
+    ${props.variant === 'quaternary' ? QuaternaryButtonStyles(props, props.theme) : ''}
 
     &:hover {
       filter: brightness(80%);

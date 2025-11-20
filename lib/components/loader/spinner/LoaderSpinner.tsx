@@ -1,10 +1,10 @@
-import { motion, Variants } from 'motion/react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
+import { HTMLMotionProps, motion,Variants } from 'motion/react';
 
 import { isLightColor } from '../../utils';
 import { BaseLoaderType } from '../types';
 
-export interface LoaderSpinnerProps extends BaseLoaderType, React.HTMLAttributes<HTMLDivElement> {
+export interface LoaderSpinnerProps extends BaseLoaderType, HTMLMotionProps<'div'> {
   numberOfDots?: number;
 }
 

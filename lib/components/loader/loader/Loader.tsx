@@ -1,9 +1,11 @@
+import { HTMLMotionProps } from 'motion/react';
+
 import { LoaderFadeDots } from '../fadeDots/LoaderFadeDots';
 import { LoaderJumpingDots } from '../jumpingDots/LoaderJumpingDots';
 import { LoaderSpinner } from '../spinner/LoaderSpinner';
 import { BaseLoaderType } from '../types';
 
-export interface LoaderProps<T extends Record<string, string | number> | null = null> extends BaseLoaderType, React.HTMLAttributes<HTMLDivElement> {
+export interface LoaderProps<T extends Record<string, string | number> | null = null> extends BaseLoaderType, HTMLMotionProps<'div'> {
   variant?: 'jumpingDots' | 'spinner' | 'fadeDots';
   extras?: T
 }

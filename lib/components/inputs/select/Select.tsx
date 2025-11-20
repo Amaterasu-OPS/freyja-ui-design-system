@@ -1,11 +1,12 @@
+import styled from '@emotion/styled';
 import { Input, InputProps } from '@ui';
 import { motion } from 'motion/react';
 import React from 'react';
-import styled from 'styled-components';
 
 type SelectKV = { value: string | number; label: string };
 
 export interface SelectProps extends InputProps {
+  id: string;
   options: SelectKV[];
   limit?: number;
   onSelectItem?: (_: SelectKV | null) => void;
@@ -60,6 +61,7 @@ const StyleMark = styled.div`
 
 export const Select = ({
   label,
+  id,
   options = [],
   disabled = false,
   error = false,
@@ -116,6 +118,7 @@ export const Select = ({
     <StyledSelect>
       <Input
         {...props}
+        id={id}
         label={label}
         onChange={(e) => {
           setSearch(e.target.value);

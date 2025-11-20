@@ -16,10 +16,19 @@ export default defineConfig({
     },
   },
   plugins: [
-    react(),
+    react({
+      jsxImportSource: '@emotion/react',
+    }),
     cssInjectedByJsPlugin(),
     dts({ include: ['lib'], rollupTypes: true }),
   ],
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: '@import "/index.scss";'
+      }
+    }
+  },
   resolve: {
     alias: {
       '@ui': resolve(__dirname, 'lib/main.ts'),
@@ -32,7 +41,15 @@ export default defineConfig({
       formats: ['es']
     },
     rollupOptions: {
-      external: ['react', 'motion'],
+      external: [
+        'react',
+        'react-dom',
+        'motion',
+        '@emotion/react',
+        '@emotion/styled',
+        '@emotion/cache',
+        '@emotion/server',
+      ],
       input: Object.fromEntries(
         glob.sync('lib/**/*.{ts,tsx}', {
           ignore: [
@@ -49,10 +66,19 @@ export default defineConfig({
         ])
       ),
       output: {
-        assetFileNames: 'assets/[name][extname]',
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name && /\.(woff2?|eot|ttf|otf)$/.test(assetInfo.name)) {
+            return 'fonts/[name][extname]';
+          }
+
+          return 'assets/[name][extname]';
+        },
         entryFileNames: '[name].js',
         globals: {
           react: 'React',
+          'react-dom': 'ReactDOM',
+          '@emotion/react': 'EmotionReact',
+          '@emotion/styled': 'EmotionStyled',
         },
       }
     },

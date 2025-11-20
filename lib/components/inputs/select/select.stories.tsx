@@ -15,6 +15,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Select: Story = {
   args: {
+    id: 'select-storybook',
     label: 'Select Label',
     options: [
       { value: 1, label: 'Apple' },

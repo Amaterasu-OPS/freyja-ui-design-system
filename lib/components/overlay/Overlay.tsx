@@ -1,8 +1,8 @@
-import { motion } from 'motion/react';
+import styled from '@emotion/styled';
+import { HTMLMotionProps, motion } from 'motion/react';
 import { useEffect } from 'react';
-import styled from 'styled-components';
 
-export interface OverlayProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface OverlayProps extends HTMLMotionProps<'div'> {
   isVisible: boolean;
   color?: string;
   opacity?: number;
@@ -12,9 +12,7 @@ export interface OverlayProps extends React.HTMLAttributes<HTMLDivElement> {
   onDismiss?: () => void;
 }
 
-const StyledOverlay = styled(motion.div).withConfig({
-  shouldForwardProp: (prop) => !['isVisible', 'color', 'opacity'].includes(prop),
-})<OverlayProps>`
+const StyledOverlay = styled(motion.div)<OverlayProps>`
   ${props => `
     position: fixed;
     top: 0;
