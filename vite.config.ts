@@ -22,13 +22,6 @@ export default defineConfig({
     cssInjectedByJsPlugin(),
     dts({ include: ['lib'], rollupTypes: true }),
   ],
-  css: {
-    preprocessorOptions: {
-      scss: {
-        additionalData: '@import "/index.scss";'
-      }
-    }
-  },
   resolve: {
     alias: {
       '@ui': resolve(__dirname, 'lib/main.ts'),
